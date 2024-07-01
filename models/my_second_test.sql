@@ -1,0 +1,3 @@
+select *
+from HEVO_DB.HEVO_SCHEMA.RAW_CUSTOMERS
+limit 1
