@@ -19,10 +19,11 @@ This repository contains a dbt project for transforming data in Snowflake. Below
 
 ## Setup
 
-### 1. Clone the Repository
 
-```sh
+1. Clone the Repository
+
 git clone https://github.com/venkateshmaisur/hevodata.git
+
 cd hevodata
 
 2. Create and Activate a Virtual Environment
