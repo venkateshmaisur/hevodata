@@ -77,39 +77,61 @@ show max_wal_senders;
 ### 4. As part of assignment create below tables and load data that shared through csv files
 
 CREATE TABLE raw_customers (
+
     customer_id INT PRIMARY KEY,
+    
     first_name VARCHAR(50),
+    
     last_name VARCHAR(50)
+
 );
 
 CREATE TABLE raw_orders (
+
     order_id INT PRIMARY KEY,
+    
     customer_id INT,
+    
     order_date DATE,
+    
     status VARCHAR(20) -- Add this line if your CSV has a status column
+
 );
 
 CREATE TABLE raw_payments (
+
     payment_id INT PRIMARY KEY,
+    
     customer_id INT,
+    
     payment_type VARCHAR(50),
+    
     amount DECIMAL(10, 2)
+
 );
 
 exit
+
 exit
 
 docker cp /path/to/raw_customers.csv postgres:/tmp/raw_customers.csv
+
 docker cp /path/to/raw_orders.csv postgres:/tmp/raw_orders.csv
+
 docker cp /path/to/raw_payments.csv postgres:/tmp/raw_payments.csv
+
 docker exec -it postgres psql -U postgres
 
 COPY raw_customers FROM '/tmp/raw_customers.csv' DELIMITER ',' CSV HEADER;
+
 COPY raw_orders FROM '/tmp/raw_orders.csv' DELIMITER ',' CSV HEADER;
+
 COPY raw_payments FROM '/tmp/raw_payments.csv' DELIMITER ',' CSV HEADER;
 
 SELECT * FROM raw_customers;
+
 SELECT * FROM raw_orders;
+
 SELECT * FROM raw_payments;
 
 ## Snowflake Setup
