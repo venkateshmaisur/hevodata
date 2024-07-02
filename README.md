@@ -95,6 +95,8 @@ SELECT * FROM raw_customers;
 SELECT * FROM raw_orders;
 SELECT * FROM raw_payments;
 
+## Snowflake Setup
+
 ### 5. Setup Snowflake trail account and create Warehouse, DB and Schema
 
 Log in to your Snowflake account at [Snowflake.](https://app.snowflake.com/)
