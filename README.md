@@ -241,6 +241,7 @@ Output of the screenshot from Snowflake is available at "snapshots"
 
 <img width="1878" alt="image" src="https://github.com/venkateshmaisur/hevodata/assets/33508734/5c48f3a2-afef-455b-9b3d-1a87d7e739d3">
 
+
 Pushing to GitHub
 
 1. Configure Git
