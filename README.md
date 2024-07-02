@@ -237,10 +237,9 @@ Created a materialized table "customers" available at models/example/customer.sq
 
     dbt run
 
-    <img width="1878" alt="image" src="https://github.com/venkateshmaisur/hevodata/assets/33508734/69321b70-de96-4096-82e3-94bc217fbdfe">
-
-
 Output of the screenshot from Snowflake is available at "snapshots"
+
+<img width="1878" alt="image" src="https://github.com/venkateshmaisur/hevodata/assets/33508734/5c48f3a2-afef-455b-9b3d-1a87d7e739d3">
 
 Pushing to GitHub
 
