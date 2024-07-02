@@ -29,7 +29,9 @@ docker pull postgres
 ### 2. Create a Database and User
 
 docker run --name postgresql -e POSTGRES_USER=<username> -e POSTGRES_PASSWORD=<password> -p 5432:5432 -d postgres
+
 docker ps -a  ## To check docker container postgresql is up or not
+
 docker start|stop|restart postgresql
 
 ### 3. Configure PostgreSQL for Remote Access and Set up Log-based Incremental Replication
@@ -49,12 +51,19 @@ host    replication     <user>          127.0.0.1/0             md5
 host    replication     <user>          ::1/0                   md5
 
 exit
+
 docker restart postgresql
+
 docker exec -it postgresql /bin/bash
+
 psql -U <username -d <db_name>
+
 alter role <user> with replication;
+
 show wal_level;
+
 show max_replication_slots;
+
 show max_wal_senders;
 
 ### 4. As part of assignment create below tables and load data that shared through csv files
