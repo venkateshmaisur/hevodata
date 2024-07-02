@@ -75,6 +75,7 @@ Pushing to GitHub
 1. Configure Git
 
 git config --global user.name "Your Name"
+
 git config --global user.email "your.email@example.com"
 
 2. Add and Commit Changes
