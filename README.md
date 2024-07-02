@@ -126,25 +126,25 @@ Add a Source:
 
 Configure PostgreSQL as Source:
 
-Database Host: Your Docker container IP
-Port: 5432
-Username: <username>
-Password: <password>
-Database Name: <database>
-Replication Slot: <name>
-Click "Test Connection" to ensure it works.
+    Database Host: Your Docker container IP
+    Port: 5432
+    Username: <username>
+    Password: <password>
+    Database Name: <database>
+    Replication Slot: <name>
+    Click "Test Connection" to ensure it works.
 
 Add a Destination:
 
-Select "Snowflake" as the destination.
-Provide the necessary Snowflake connection details:
-Account URL
-Warehouse
-Database
-Schema
-Username
-Password
-Click "Test Connection" to ensure it works.
+    Select "Snowflake" as the destination.
+    Provide the necessary Snowflake connection details:
+    Account URL
+    Warehouse
+    Database
+    Schema
+    Username
+    Password
+    Click "Test Connection" to ensure it works.
 
 Create the Pipeline:
 
@@ -168,8 +168,8 @@ Question: Once the data has been loaded into the Snowflake warehouse model, the 
 ### Using the starter project
 
 Try running the following commands:
-- dbt run
-- dbt test
+    - dbt run
+    - dbt test
 
 # DBT Project
 
@@ -187,41 +187,41 @@ This repository contains a dbt project for transforming data in Snowflake. Below
 
 1. Clone the Repository
 
-git clone https://github.com/venkateshmaisur/hevodata.git
-
-cd hevodata
+    git clone https://github.com/venkateshmaisur/hevodata.git
+    
+    cd hevodata
 
 2. Create and Activate a Virtual Environment
 
-python -m venv dbt-env
-source dbt-env/bin/activate
+    python -m venv dbt-env
+    source dbt-env/bin/activate
 
 3. Install dbt and 
 
-pip install dbt
+    pip install dbt
 
 4. Set Up dbt Profile
 Create the profiles directory if it doesn't exist:
 
-mkdir -p ~/.dbt
+    mkdir -p ~/.dbt
 
 Create a profiles.yml file in the ~/.dbt directory with the following content:
 
-my_dbt_project:
-  target: dev
-  outputs:
-    dev:
-      type: snowflake
-      account: qghmomc-pc13062
-      user: test_user
-      password: your_password_here
-      role: transform
-      database: HEVO_DB
-      warehouse: HEVO_WAREHOUSE
-      schema: HEVO_SCHEMA
-      threads: 1
-      client_session_keep_alive: False
-      query_tag: anything
+    my_dbt_project:
+      target: dev
+      outputs:
+        dev:
+          type: snowflake
+          account: qghmomc-pc13062
+          user: test_user
+          password: your_password_here
+          role: transform
+          database: HEVO_DB
+          warehouse: HEVO_WAREHOUSE
+          schema: HEVO_SCHEMA
+          threads: 1
+          client_session_keep_alive: False
+          query_tag: anything
 
 Replace your_password_here with your actual Snowflake password.
 
@@ -229,13 +229,16 @@ Running dbt Commands
 
 1. Debug the Connection
 
-dbt debug --log-level debug
+    dbt debug --log-level debug
 
 2. Run dbt Models
 
 Created a materialized table "customers" available at models/example/customer.sql
 
-dbt run
+    dbt run
+
+    <img width="1878" alt="image" src="https://github.com/venkateshmaisur/hevodata/assets/33508734/69321b70-de96-4096-82e3-94bc217fbdfe">
+
 
 Output of the screenshot from Snowflake is available at "snapshots"
 
@@ -243,18 +246,18 @@ Pushing to GitHub
 
 1. Configure Git
 
-git config --global user.name "Your Name"
-
-git config --global user.email "your.email@example.com"
+    git config --global user.name "Your Name"
+    
+    git config --global user.email "your.email@example.com"
 
 2. Add and Commit Changes
 
-git add .
-git commit -m "Initial commit of dbt project"
+    git add .
+    git commit -m "Initial commit of dbt project"
 
 3. Push Changes to main Branch
 
-git push -u origin main
+    git push -u origin main
 
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
