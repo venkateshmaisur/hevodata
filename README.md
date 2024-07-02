@@ -24,19 +24,19 @@ https://docs.docker.com/engine/install/centos/
 
 ### 1. Install PostgreSQL
 
-docker pull postgres
+    docker pull postgres
 
 ### 2. Create a Database and User
 
-docker run --name postgresql -e POSTGRES_USER=<username> -e POSTGRES_PASSWORD=<password> -p 5432:5432 -d postgres
-
-docker ps -a  ## To check docker container postgresql is up or not
-
-docker start|stop|restart postgresql
+    docker run --name postgresql -e POSTGRES_USER=<username> -e POSTGRES_PASSWORD=<password> -p 5432:5432 -d postgres
+    
+    docker ps -a  ## To check docker container postgresql is up or not
+    
+    docker start|stop|restart postgresql
 
 ### 3. Configure PostgreSQL for Remote Access and Set up Log-based Incremental Replication
 
-docker exec -it postgresql /bin/bash
+    docker exec -it postgresql /bin/bash
 
 vim /var/lib/postgresql/data/postgresql.conf
 
