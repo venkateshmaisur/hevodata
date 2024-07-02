@@ -40,36 +40,29 @@ docker exec -it postgresql /bin/bash
 
 vim /var/lib/postgresql/data/postgresql.conf
 
-listen_addresses = '*'
-
-wal_level = logical
-
-max_replication_slots = 4
-
-max_wal_senders = 4
+    listen_addresses = '*'
+    wal_level = logical
+    max_replication_slots = 4
+    max_wal_senders = 4
 
 vim /var/lib/postgresql/data/pg_hba.conf
 
-host    all             all             0.0.0.0/0               md5
-
-local   replication     <user>                                  peer
-
-host    replication     <user>          127.0.0.1/0             md5
-
-host    replication     <user>          ::1/0                   md5
+    host    all             all             0.0.0.0/0               md5
+    local   replication     <user>                                  peer
+    host    replication     <user>          127.0.0.1/0             md5
+    host    replication     <user>          ::1/0                   md5
 
 exit
 
-`docker restart postgresql
-docker exec -it postgresql /bin/bash
-psql -U <username -d <db_name>
-alter role <user> with replication;
-show wal_level;
-show max_replication_slots;
-show max_wal_senders;`
+    docker restart postgresql
+    docker exec -it postgresql /bin/bash
+    psql -U <username -d <db_name>
+    alter role <user> with replication;
+    show wal_level;
+    show max_replication_slots;
+    show max_wal_senders;
 
 ### 4. As part of assignment create below tables and load data that shared through csv files
-
 
 
     CREATE TABLE raw_customers (
