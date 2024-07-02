@@ -40,99 +40,65 @@ docker exec -it postgresql /bin/bash
 
 vim /var/lib/postgresql/data/postgresql.conf
 
-listen_addresses = '*'
-
+`listen_addresses = '*'
 wal_level = logical
-
 max_replication_slots = 4
-
-max_wal_senders = 4
+max_wal_senders = 4`
 
 vim /var/lib/postgresql/data/pg_hba.conf
 
-host    all             all             0.0.0.0/0               md5
-
+`host    all             all             0.0.0.0/0               md5
 local   replication     <user>                                  peer
-
 host    replication     <user>          127.0.0.1/0             md5
-
-host    replication     <user>          ::1/0                   md5
+host    replication     <user>          ::1/0                   md5`
 
 exit
 
-docker restart postgresql
-
+`docker restart postgresql
 docker exec -it postgresql /bin/bash
-
 psql -U <username -d <db_name>
-
 alter role <user> with replication;
-
 show wal_level;
-
 show max_replication_slots;
-
-show max_wal_senders;
+show max_wal_senders;`
 
 ### 4. As part of assignment create below tables and load data that shared through csv files
 
-CREATE TABLE raw_customers (
 
-    customer_id INT PRIMARY KEY,
+
+    CREATE TABLE raw_customers (
+        customer_id INT PRIMARY KEY,
+        first_name VARCHAR(50),
+        last_name VARCHAR(50)
+    );
+
+    CREATE TABLE raw_orders (
+        order_id INT PRIMARY KEY,
+        customer_id INT,
+        order_date DATE,
+        status VARCHAR(20)
+    );
+
+    CREATE TABLE raw_payments (
+        payment_id INT PRIMARY KEY,
+        customer_id INT,
+        payment_type VARCHAR(50),
+        amount DECIMAL(10, 2)
+    );
     
-    first_name VARCHAR(50),
-    
-    last_name VARCHAR(50)
+    exit
+    exit
 
-);
-
-CREATE TABLE raw_orders (
-
-    order_id INT PRIMARY KEY,
-    
-    customer_id INT,
-    
-    order_date DATE,
-    
-    status VARCHAR(20) -- Add this line if your CSV has a status column
-
-);
-
-CREATE TABLE raw_payments (
-
-    payment_id INT PRIMARY KEY,
-    
-    customer_id INT,
-    
-    payment_type VARCHAR(50),
-    
-    amount DECIMAL(10, 2)
-
-);
-
-exit
-
-exit
-
-docker cp /path/to/raw_customers.csv postgres:/tmp/raw_customers.csv
-
-docker cp /path/to/raw_orders.csv postgres:/tmp/raw_orders.csv
-
-docker cp /path/to/raw_payments.csv postgres:/tmp/raw_payments.csv
-
-docker exec -it postgres psql -U postgres
-
-COPY raw_customers FROM '/tmp/raw_customers.csv' DELIMITER ',' CSV HEADER;
-
-COPY raw_orders FROM '/tmp/raw_orders.csv' DELIMITER ',' CSV HEADER;
-
-COPY raw_payments FROM '/tmp/raw_payments.csv' DELIMITER ',' CSV HEADER;
-
-SELECT * FROM raw_customers;
-
-SELECT * FROM raw_orders;
-
-SELECT * FROM raw_payments;
+    docker cp /path/to/raw_customers.csv postgres:/tmp/raw_customers.csv
+    docker cp /path/to/raw_orders.csv postgres:/tmp/raw_orders.csv
+    docker cp /path/to/raw_payments.csv postgres:/tmp/raw_payments.csv
+    docker exec -it postgres psql -U postgres
+    COPY raw_customers FROM '/tmp/raw_customers.csv' DELIMITER ',' CSV HEADER;
+    COPY raw_orders FROM '/tmp/raw_orders.csv' DELIMITER ',' CSV HEADER;
+    COPY raw_payments FROM '/tmp/raw_payments.csv' DELIMITER ',' CSV HEADER;
+    SELECT * FROM raw_customers;
+    SELECT * FROM raw_orders;
+    SELECT * FROM raw_payments;
 
 ## Snowflake Setup
 
@@ -140,16 +106,16 @@ SELECT * FROM raw_payments;
 
 Log in to your Snowflake account at [Snowflake.](https://app.snowflake.com/)
 
-CREATE OR REPLACE WAREHOUSE HEVO_WAREHOUSE
-WITH
-WAREHOUSE_SIZE = 'XSMALL'
-AUTO_SUSPEND = 300
-AUTO_RESUME = TRUE
-INITIALLY_SUSPENDED = TRUE;
-
-CREATE OR REPLACE DATABASE HEVO_DB;
-
-CREATE OR REPLACE SCHEMA HEVO_SCHEMA;
+    CREATE OR REPLACE WAREHOUSE HEVO_WAREHOUSE
+    WITH
+    WAREHOUSE_SIZE = 'XSMALL'
+    AUTO_SUSPEND = 300
+    AUTO_RESUME = TRUE
+    INITIALLY_SUSPENDED = TRUE;
+    
+    CREATE OR REPLACE DATABASE HEVO_DB;
+    
+    CREATE OR REPLACE SCHEMA HEVO_SCHEMA;
 
 Now create a login user and grant respective privileges to use for DBT 
 
