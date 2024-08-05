@@ -1,4 +1,4 @@
-### Welcome to Hevodata Technical Assessment ###
+### Welcome ###
 
 # Data Pipeline Project
 
